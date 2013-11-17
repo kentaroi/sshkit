@@ -32,7 +32,7 @@ module SSHKit
 
       private
 
-      def execute(*args)
+      def _execute(*args)
         command(*args).tap do |cmd|
           output << cmd
 
