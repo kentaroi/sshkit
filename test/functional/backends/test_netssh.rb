@@ -78,6 +78,16 @@ module SSHKit
         end.run
       end
 
+      def test_test_result
+        succeeded_test_result = failed_test_result = nil
+        Netssh.new(a_host) do |host|
+          succeeded_test_result = test('test -d ~')
+          failed_test_result    = test('test -e blahblahblah')
+        end.run
+        assert_equal true,  succeeded_test_result
+        assert_equal false, failed_test_result
+      end
+
       def test_backgrounding_a_process
         #SSHKit.config.output = SSHKit::Formatter::Pretty.new($stdout)
         process_list = ""
